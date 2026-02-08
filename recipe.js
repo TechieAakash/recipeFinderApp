@@ -483,7 +483,7 @@ class RecipeApp {
                 config.headers['Authorization'] = `Bearer ${this.token}`;
             }
 
-            const response = await fetch(`http://127.0.0.1:5000${endpoint}`, config);
+            const response = await fetch(`${endpoint}`, config);
             
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));

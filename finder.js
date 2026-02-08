@@ -107,7 +107,7 @@ class RecipeFinder {
                 ...options
             };
 
-            const response = await fetch(`http://127.0.0.1:5000${endpoint}`, config);
+            const response = await fetch(`${endpoint}`, config);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return await response.json();
         } catch (error) {
@@ -736,7 +736,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Health check function
 async function checkAPIHealth() {
     try {
-        const response = await fetch('http://127.0.0.1:5000/health');
+        const response = await fetch('/health');
         const data = await response.json();
         console.log('API Health:', data);
         return true;
