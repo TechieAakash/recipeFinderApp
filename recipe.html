@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Finder</title>
+  <link rel="stylesheet" href="recipe.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Auth Modals -->
+  <div id="authModals">
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal auth-modal">
+      <div class="modal-content medium">
+        <span class="close">&times;</span>
+        <div class="auth-form">
+          <h2>Welcome Back!</h2>
+          <p>Sign in to your account</p>
+          
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" required>
+              <div class="error-message" id="loginEmailError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" required>
+              <div class="error-message" id="loginPasswordError"></div>
+            </div>
+            
+            <button type="submit" class="btn-primary full-width">
+              <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+          </form>
+          
+          <div class="auth-switch">
+            <p>Don't have an account? <a href="#" id="showRegister">Sign up</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal auth-modal">
+      <div class="modal-content medium">
+        <span class="close">&times;</span>
+        <div class="auth-form">
+          <h2>Join Recipe Finder</h2>
+          <p>Create your free account</p>
+          
+          <form id="registerForm">
+            <div class="form-group">
+              <label for="registerUsername">Username</label>
+              <input type="text" id="registerUsername" required minlength="3">
+              <div class="error-message" id="registerUsernameError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="registerEmail">Email</label>
+              <input type="email" id="registerEmail" required>
+              <div class="error-message" id="registerEmailError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="registerPassword">Password</label>
+              <input type="password" id="registerPassword" required minlength="6">
+              <div class="error-message" id="registerPasswordError"></div>
+            </div>
+            
+            <button type="submit" class="btn-primary full-width">
+              <i class="fas fa-user-plus"></i> Create Account
+            </button>
+          </form>
+          
+          <div class="auth-switch">
+            <p>Already have an account? <a href="#" id="showLogin">Sign in</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal auth-modal">
+      <div class="modal-content medium">
+        <span class="close">&times;</span>
+        <div class="auth-form">
+          <h2>My Profile</h2>
+          
+          <div id="profileInfo">
+            <!-- Profile info will be loaded here -->
+          </div>
+          
+          <form id="profileForm" style="display: none;">
+            <div class="form-group">
+              <label for="profileUsername">Username</label>
+              <input type="text" id="profileUsername" required minlength="3">
+              <div class="error-message" id="profileUsernameError"></div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" id="cancelEdit">Cancel</button>
+              <button type="submit" class="btn-primary">Save Changes</button>
+            </div>
+          </form>
+          
+          <div class="profile-actions">
+            <button class="btn-secondary full-width" id="editProfile">
+              <i class="fas fa-edit"></i> Edit Profile
+            </button>
+            <button class="btn-danger full-width" id="logoutButton">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <div class="logo-section">
+        <h1>🍳 Recipe Finder</h1>
+        <p>Discover amazing recipes instantly!</p>
+      </div>
+      
+      <div class="header-actions">
+        <div class="header-stats">
+          <span id="recipeCount">Loading...</span>
+          <span id="categoryCount"></span>
+        </div>
+        
+        <div class="user-section" id="userSection">
+          <div id="authButtons" class="auth-buttons">
+            <button class="btn-secondary" id="loginButton">
+              <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+            <button class="btn-primary" id="registerButton">
+              <i class="fas fa-user-plus"></i> Sign Up
+            </button>
+          </div>
+          
+          <div class="user-menu" id="userMenu" style="display: none;">
+            <button class="user-avatar" id="userAvatar">
+              <i class="fas fa-user"></i>
+              <span id="usernameDisplay">User</span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="user-dropdown" id="userDropdown">
+              <a href="#" class="dropdown-item" id="profileButton">
+                <i class="fas fa-user"></i> My Profile
+              </a>
+              <a href="#" class="dropdown-item" id="favoritesButton">
+                <i class="fas fa-heart"></i> My Favorites
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item logout" id="logoutDropdown">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h2>Find Your Perfect Recipe</h2>
+        <p>Search through our collection of delicious recipes with advanced filtering</p>
+      </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+      <div class="search-box">
+        <div class="search-input-group">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search recipes by name, ingredients...">
+          <button id="searchButton" class="btn-primary">
+            Search
+          </button>
+        </div>
+        <button id="showAllButton" class="btn-secondary">
+          <i class="fas fa-list"></i> Show All Recipes
+        </button>
+      </div>
+
+      <!-- Quick Categories -->
+      <div class="quick-categories">
+        <h3>Quick Categories:</h3>
+        <div class="category-tags" id="quickCategories">
+          <!-- Categories will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Advanced Filters -->
+      <div class="filters-collapsible">
+        <button class="filter-toggle">
+          <i class="fas fa-sliders-h"></i> Advanced Filters
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="filters-content">
+          <div class="filters-grid">
+            <div class="filter-group">
+              <label>Category</label>
+              <select id="categoryFilter">
+                <option value="">All Categories</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Difficulty</label>
+              <select id="difficultyFilter">
+                <option value="">Any Difficulty</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Max Cooking Time</label>
+              <select id="timeFilter">
+                <option value="">Any Time</option>
+                <option value="30">≤ 30 minutes</option>
+                <option value="45">≤ 45 minutes</option>
+                <option value="60">≤ 60 minutes</option>
+                <option value="90">≤ 90 minutes</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Sort By</label>
+              <select id="sortFilter">
+                <option value="name">Name (A-Z)</option>
+                <option value="time">Cooking Time</option>
+                <option value="rating">Highest Rating</option>
+                <option value="difficulty">Difficulty</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <section class="tabs-section">
+      <div class="tabs">
+        <button class="tab-link active" data-tab="all-recipes">
+          <i class="fas fa-utensils"></i> All Recipes
+        </button>
+        <button class="tab-link" data-tab="popular">
+          <i class="fas fa-fire"></i> Popular
+        </button>
+        <button class="tab-link" data-tab="quick-meals">
+          <i class="fas fa-clock"></i> Quick Meals
+        </button>
+        <button class="tab-link" data-tab="categories">
+          <i class="fas fa-tags"></i> Categories
+        </button>
+        <button class="tab-link" data-tab="favorites" id="favoritesTab">
+          <i class="fas fa-heart"></i> My Favorites
+        </button>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="content-section">
+      <!-- All Recipes Tab -->
+      <div id="all-recipes" class="tab-content active">
+        <div class="results-header">
+          <h3>All Recipes</h3>
+          <div class="results-info">
+            <span id="resultsCount">0 recipes found</span>
+            <div class="view-toggle">
+              <button class="view-btn active" data-view="grid">
+                <i class="fas fa-th"></i>
+              </button>
+              <button class="view-btn" data-view="list">
+                <i class="fas fa-list"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="results" class="results-container grid-view">
+          <!-- Recipes will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Popular Recipes Tab -->
+      <div id="popular" class="tab-content">
+        <div class="results-header">
+          <h3>Popular Recipes</h3>
+          <p>Most loved recipes by our community</p>
+        </div>
+        <div id="popularResults" class="results-container grid-view">
+          <div class="loading">Loading popular recipes...</div>
+        </div>
+      </div>
+
+      <!-- Quick Meals Tab -->
+      <div id="quick-meals" class="tab-content">
+        <div class="results-header">
+          <h3>Quick & Easy Meals</h3>
+          <p>Recipes ready in 30 minutes or less</p>
+        </div>
+        <div id="quickMealsResults" class="results-container grid-view">
+          <!-- Quick meals will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Categories Tab -->
+      <div id="categories" class="tab-content">
+        <div class="results-header">
+          <h3>Recipe Categories</h3>
+          <p>Browse recipes by category</p>
+        </div>
+        <div id="categoriesList" class="categories-grid">
+          <!-- Categories will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Favorites Tab -->
+      <div id="favorites" class="tab-content">
+        <div class="results-header">
+          <h3>My Favorite Recipes</h3>
+          <p>Your saved recipes</p>
+        </div>
+        <div id="favoritesResults" class="results-container grid-view">
+          <div class="auth-required" id="favoritesAuthRequired">
+            <div class="auth-message">
+              <i class="fas fa-lock"></i>
+              <h4>Sign in required</h4>
+              <p>Please sign in to view your favorite recipes</p>
+              <button class="btn-primary" id="loginFromFavorites">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+              </button>
+            </div>
+          </div>
+          <div id="favoritesContent" style="display: none;">
+            <!-- Favorites will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Recipe Detail Modal -->
+  <div id="recipeModal" class="modal">
+    <div class="modal-content large">
+      <span class="close">&times;</span>
+      <div id="recipeModalContent">
+        <!-- Recipe details will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>Made with ❤️ by Aakash</p>
+      <div class="footer-links">
+        <span id="totalRecipes">Loading recipes...</span>
+        <span id="apiStatus" class="status-online">● API Online</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="recipe.js"></script>
+</body>
+</html>
