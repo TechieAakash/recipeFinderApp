@@ -77,9 +77,6 @@ def get_session_id():
         session_id = str(uuid.uuid4())
     return session_id
 
-@app.route('/health', methods=['GET'])
-def health_check():
-    return jsonify({"status": "healthy", "timestamp": datetime.datetime.now().isoformat()})
 
 # Auth Routes
 @app.route('/register', methods=['POST'])
