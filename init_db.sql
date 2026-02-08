@@ -658,6 +658,6 @@ CREATE TABLE IF NOT EXISTS user_favorites (
 );
 
 -- Add indexes for better performance
--- CREATE INDEX idx_user_favorites_user ON user_favorites(user_id);
--- CREATE INDEX idx_user_favorites_recipe ON user_favorites(recipe_id);
--- CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_user_favorites_user ON user_favorites(user_id);
+CREATE INDEX idx_user_favorites_recipe ON user_favorites(recipe_id);
+CREATE INDEX idx_users_email ON users(email);

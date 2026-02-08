@@ -13,6 +13,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-here')
 CORS(app, supports_credentials=True)
 
+from mysql.connector import pooling
+
 # Database configuration
 # Use environment variables for production (Render), fallback to local defaults
 DB_CONFIG = {
@@ -22,6 +24,19 @@ DB_CONFIG = {
     "database": os.environ.get("DB_NAME", "recipe_finder"),
     "port": int(os.environ.get("DB_PORT", 3306))
 }
+
+# Create a connection pool
+try:
+    db_pool = pooling.MySQLConnectionPool(
+        pool_name="recipe_pool",
+        pool_size=5,
+        pool_reset_session=True,
+        **DB_CONFIG
+    )
+    print("✅ Database connection pool created successfully")
+except Exception as e:
+    print(f"❌ Failed to create database connection pool: {e}")
+    db_pool = None
 
 def generate_token(user_id):
     """Generate JWT token for a user."""
@@ -62,11 +77,13 @@ def token_required(f):
     return decorated
 
 def get_db_connection():
-    """Create and return a database connection"""
+    """Get a connection from the pool"""
     try:
-        conn = mysql.connector.connect(**DB_CONFIG)
-        return conn
-    except mysql.connector.Error as e:
+        if db_pool:
+            return db_pool.get_connection()
+        else:
+            return mysql.connector.connect(**DB_CONFIG)
+    except Exception as e:
         print(f"❌ Database connection error: {e}")
         return None
 
