@@ -1067,35 +1067,259 @@ footer {
 }
 
 @media (max-width: 480px) {
+
+    /* Base padding and spacing adjustments */
+    main {
+        padding: 0 1rem;
+    }
+
     .logo-section h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+
+    .logo-section p {
+        font-size: 0.9rem;
     }
 
     .header-stats {
         flex-direction: column;
         gap: 0.5rem;
+        font-size: 0.9rem;
     }
 
-    .recipe-meta-large {
+    /* Hero Section */
+    .hero-section {
+        padding: 2rem 1rem;
+        border-radius: 0 0 15px 15px;
+    }
+
+    .hero-content h2 {
+        font-size: 1.6rem;
+        line-height: 1.3;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    /* Search Section */
+    .search-section {
+        padding: 1.2rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-input-group input {
+        padding: 0.9rem 0.9rem 0.9rem 2.8rem;
+        font-size: 0.95rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 0.9rem 1.5rem;
+        font-size: 0.95rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Quick Categories */
+    .quick-categories h3 {
+        font-size: 0.95rem;
+    }
+
+    .category-tags {
+        gap: 0.5rem;
+    }
+
+    .category-tag {
+        padding: 0.4rem 0.9rem;
+        font-size: 0.8rem;
+    }
+
+    /* Filters */
+    .filters-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .filter-group select {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    /* Tabs */
+    .tabs-section {
+        margin-bottom: 1.5rem;
+    }
+
+    .tabs {
+        padding: 0.3rem;
+        gap: 0.3rem;
+    }
+
+    .tab-link {
+        padding: 0.8rem 1rem;
+        font-size: 0.85rem;
+        min-width: 100px;
+    }
+
+    .tab-link i {
+        font-size: 0.9rem;
+    }
+
+    /* Content Section */
+    .content-section {
+        padding: 1.2rem;
+        border-radius: 12px;
+    }
+
+    .results-header h3 {
+        font-size: 1.4rem;
+    }
+
+    /* Recipe Cards */
+    .recipe-card {
+        border-radius: 12px;
+    }
+
+    .recipe-image {
+        height: 180px;
+    }
+
+    .recipe-info {
+        padding: 1rem;
+    }
+
+    .recipe-title {
+        font-size: 1.1rem;
+    }
+
+    .recipe-description {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .recipe-meta {
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .recipe-actions {
         flex-direction: column;
-        align-items: center;
+        gap: 0.5rem;
     }
 
+    .view-recipe {
+        width: 100%;
+        padding: 0.7rem;
+    }
+
+    /* List view on mobile */
     .list-view .recipe-card {
         flex-direction: column;
     }
 
     .list-view .recipe-image {
         width: 100%;
-        height: 200px;
+        height: 180px;
+    }
+
+    /* Categories Grid */
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .category-card {
+        padding: 1.5rem;
+    }
+
+    .category-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .category-card h4 {
+        font-size: 1.1rem;
+    }
+
+    /* Modal Styles */
+    .modal-content {
+        width: 98%;
+        margin: 2% auto;
+        max-height: 96vh;
+        border-radius: 15px;
+    }
+
+    .close {
+        right: 1rem;
+        top: 0.8rem;
+        font-size: 1.8rem;
+    }
+
+    /* Recipe Detail */
+    .recipe-detail {
+        padding: 1rem;
+    }
+
+    .recipe-detail-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .recipe-meta-large {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
     }
 
     .time-info {
         grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .time-item {
+        padding: 0.8rem;
     }
 
     .nutrition-facts {
         grid-template-columns: 1fr;
+    }
+
+    /* Footer */
+    footer {
+        padding: 1.2rem 1rem;
+    }
+
+    .footer-content {
+        gap: 0.8rem;
+    }
+}
+
+/* Extra small devices (less than 360px) */
+@media (max-width: 360px) {
+    .logo-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-content h2 {
+        font-size: 1.4rem;
+    }
+
+    .tab-link {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.8rem;
+        min-width: 90px;
+    }
+
+    .recipe-title {
+        font-size: 1rem;
+    }
+
+    .category-tag {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.75rem;
     }
 }
 
