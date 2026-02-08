@@ -1,11 +1,12 @@
 import mysql.connector
+import os
 
 CONFIG = {
-    'user': 'root',
-    'password': 'LEtcQCNoTgSZOoHbWKFZVSfQhjIIjrYT',
-    'host': 'turntable.proxy.rlwy.net',
-    'port': 13082,
-    'database': 'railway', 
+    'user': os.environ.get('DB_USER', 'root'),
+    'password': os.environ.get('DB_PASSWORD', ''),  # Required: Set via environment variable
+    'host': os.environ.get('DB_HOST', 'localhost'),
+    'port': int(os.environ.get('DB_PORT', 3306)),
+    'database': os.environ.get('DB_NAME', 'recipe_finder'),
     'autocommit': True
 }
 

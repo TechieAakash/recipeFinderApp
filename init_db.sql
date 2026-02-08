@@ -1,5 +1,5 @@
 -- Database creation removed to use default 'railway' database provided by host
--- CREATE DATABASE IF NOT EXISTS recipe_finder;
+-- make CREATE DATABASE IF NOT EXISTS recipe_finder;
 -- USE recipe_finder;
 
 -- Enhanced recipes table without user dependencies

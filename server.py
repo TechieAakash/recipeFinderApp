@@ -20,7 +20,7 @@ from mysql.connector import pooling
 DB_CONFIG = {
     "host": os.environ.get("DB_HOST", "localhost"),
     "user": os.environ.get("DB_USER", "root"),
-    "password": os.environ.get("DB_PASSWORD", "admin123"),
+    "password": os.environ.get("DB_PASSWORD", ""),  # Required: Set via environment variable
     "database": os.environ.get("DB_NAME", "recipe_finder"),
     "port": int(os.environ.get("DB_PORT", 3306))
 }

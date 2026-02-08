@@ -108,12 +108,13 @@ def check_database_config():
     """Check database configuration"""
     print("\n=== Checking Database Configuration ===")
     
-    print("Database Config (from server.py):")
-    print("  Host: localhost")
-    print("  User: root")
-    print("  Password: admin123")
-    print("  Database: recipe_finder")
+    print("Database Config (from environment variables):")
+    print("  Host: DB_HOST (default: localhost)")
+    print("  User: DB_USER (default: root)")
+    print("  Password: DB_PASSWORD (required - set via environment)")
+    print("  Database: DB_NAME (default: recipe_finder)")
     print("\n⚠  Note: Make sure MySQL is running and the database exists!")
+    print("⚠  Set DB_PASSWORD environment variable before running the server.")
     print("⚠  Run SQL schema file to create tables if not done already.")
     
     return True
